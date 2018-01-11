@@ -8,12 +8,12 @@ services:
     working_dir: /data/elasticsearch
     environment:
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms2g -Xms2g"
+      - "ES_JAVA_OPTS=-Xms512m -Xms512m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-    mem_limit: 3g
+    mem_limit: 1g
     volumes:
       - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - /data/es.alice.products.comments.prd/data:/data/elasticsearch/data
