@@ -1,0 +1,23 @@
+version: '2'
+services:
+  alice.products.es-prd:
+    image: elasticsearch:latest
+    container_name: es.alice.products.comments
+    restart: on-failure
+    network_mode: bridge
+    working_dir: /data/elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2g -Xms2g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 3g
+    volumes:
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /data/es.alice.products.comments.prd/data:/data/elasticsearch/data
+      - /data/es.alice.products.comments.prd/logs:/data/elasticsearch/logs
+    ports:
+      - 7200:9200
+      - 7201:9300
