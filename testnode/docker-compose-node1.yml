@@ -1,0 +1,24 @@
+version: '2'
+services:
+  elasticsearch1:
+    image: elasticsearch:latest
+    container_name: elasticsearch1
+    restart: on-failure
+    network_mode: bridge
+    working_dir: /data/elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xms512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+    volumes:
+      - ./elasticsearch_node1.yml:/usr/share/elasticsearch/config/elasticsearch_node1.yml
+      - /data/es.alice.products.comments.prd/data1:/data/elasticsearch/data1
+      - /data/es.alice.products.comments.prd/logs1:/data/elasticsearch/logs1
+    ports:
+      - 9201:9201
+      - 9301:9301
+    network_mode: "bridge"

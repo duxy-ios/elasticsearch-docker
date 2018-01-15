@@ -1,0 +1,11 @@
+version: '2'
+services:
+  kibana-prd:  
+    image: kibana:latest  
+    container_name: kibana-prd  
+    restart: always
+    ports:  
+       - "5601:5601"  
+    links:  
+       - alice.products.es-prd 
+

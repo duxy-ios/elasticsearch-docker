@@ -1,0 +1,18 @@
+http.host: 0.0.0.0
+cluster.name: alice.products.analysis.es.prd
+node.name: ELK-node3
+node.master: false
+node.data: true
+#path.data: /data/elasticsearch/data
+path.data: /usr/share/elasticsearch/data2
+path.logs: /usr/share/elasticsearch/logs2 
+http.port: 9202
+transport.tcp.port: 9302
+#network.publish_host: 10.25.109.253
+# discovery.zen.minimum_master_nodes: 2 #用来配置主节点数量的最少值，如果主节点数量低于该值，闭包范围内的集群将会停止服务,之所以加粗体
+network.publish_host: localhost
+# discovery.zen.minimum_master_nodes: 2 
+#用来配置主节点数量的最少值，如果主节点数量低于该值，闭包范围内的集群将会停止服务,之所以加粗体
+discovery.zen.ping.unicast.hosts: ["localhost:9300","localhost:9301","localhost:9302"]
+
+#bootstrap.mlockall: true #锁住内存。因为当jvm开始swapping时es的效率会降低，所以要保证它不swap，可以把ES_MIN_MEM和ES_MAX_MEM两个环境变量设置成同一个值，并且保证机器有足够的内存分配给es。同时也要允许elasticsearch的进程可以锁住内存
